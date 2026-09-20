@@ -61,7 +61,7 @@ export const pricingServices: PricingService[] = [
       },
       {
         name: { en: "Custom Platform", ar: "منصة مخصصة" },
-        price: "From $400",
+        price: " $400",
         note: { en: "Scoped to your requirements", ar: "حسب احتياجاتك" },
         description: {
           en: "Fully custom-built, priced around what you need.",
@@ -120,7 +120,7 @@ export const pricingServices: PricingService[] = [
       },
       {
         name: { en: "Custom App", ar: "تطبيق مخصص" },
-        price: "From $500",
+        price: " $500",
         note: { en: "Scoped to your requirements", ar: "حسب احتياجاتك" },
         description: {
           en: "Complex apps — marketplaces, real-time features, etc.",
@@ -178,7 +178,7 @@ export const pricingServices: PricingService[] = [
       },
       {
         name: { en: "Custom Platform", ar: "منصة مخصصة" },
-        price: "From $500",
+        price: " $500",
         note: { en: "Scoped to your requirements", ar: "حسب احتياجاتك" },
         description: {
           en: "Full internal systems built around your operations.",
