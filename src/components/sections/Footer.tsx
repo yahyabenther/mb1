@@ -41,26 +41,36 @@ function Footer() {
             </div>
           </div>
 
-          <div>
-            <h4 className="text-sm font-semibold text-white/80">{t.footer.contactHeading}</h4>
-            <div className="mt-4 flex flex-col gap-3 text-sm text-[#A8B0D0]">
-              <a href="mailto:hello@ybdev.com" className="transition hover:text-white">hello@ybdev.com</a>
-              <span>{t.footer.remote}</span>
-            </div>
-          </div>
+       
 
           <div>
             <h4 className="text-sm font-semibold text-white/80">{t.footer.follow}</h4>
             <div className="mt-4 flex gap-4">
-              <a href="#" aria-label="GitHub" className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white/60 transition hover:text-white">
-                <GithubIcon />
-              </a>
-              <a href="#" aria-label="LinkedIn" className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white/60 transition hover:text-white">
-                <LinkedinIcon />
-              </a>
-              <a href="mailto:hello@ybdev.com" aria-label="Email" className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white/60 transition hover:text-white">
-                <Mail size={18} />
-              </a>
+    <a  
+  href="https://github.com/yahyabenther"
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="GitHub"
+  className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white/60 transition hover:text-white"
+>
+  <GithubIcon />
+</a>
+<a
+  href="https://www.linkedin.com/in/yahya-bentaher-829a24281/"
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="LinkedIn"
+  className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white/60 transition hover:text-white"
+>
+  <LinkedinIcon />
+</a>
+<a
+  href="mailto:yahyabotta@gmail.com"
+  aria-label="Email"
+  className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white/60 transition hover:text-white"
+>
+  <Mail size={18} />
+</a>
             </div>
           </div>
         </div>

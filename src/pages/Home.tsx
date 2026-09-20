@@ -30,9 +30,10 @@ function Home() {
     <main className="min-h-screen">
       <Navbar />
       <Hero />
+        <Projects />
       <Services />
       <ProjectTypes />
-      <Projects />
+    
       <Process />
       <About />
       <Testimonials />

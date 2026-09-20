@@ -1,73 +1,37 @@
-import { useMemo, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/sections/Footer";
 import { WhatsAppIcon, getWhatsAppUrl } from "../components/WhatsAppButton";
-import { projects } from "../data/projects";
+import { useProjects } from "../hooks/useProjects";
+import { iconMap } from "../lib/iconMap";
 import { useLanguage } from "../i18n/LanguageContext";
 
 function Work() {
   const { t, language } = useLanguage();
-  const [activeCategory, setActiveCategory] = useState("all");
-
-  const categories = useMemo(() => {
-    const unique = Array.from(
-      new Set(projects.map((p) => p.category[language]))
-    );
-    return ["all", ...unique];
-  }, [language]);
-
-  const filteredProjects = useMemo(() => {
-    if (activeCategory === "all") return projects;
-    return projects.filter((p) => p.category[language] === activeCategory);
-  }, [activeCategory, language]);
+  const { projects, loading } = useProjects();
 
   return (
     <main className="min-h-screen">
       <Navbar />
-
       <section className="relative pb-20 pt-40 lg:pt-48">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <p className="mb-4 text-sm font-medium uppercase tracking-[0.2em] text-[#35D6B0]">
-            {t.work.label}
-          </p>
+          <p className="mb-4 text-sm font-medium uppercase tracking-[0.2em] text-[#35D6B0]">{t.work.label}</p>
           <h1 className="max-w-3xl text-4xl font-semibold tracking-[-0.03em] sm:text-5xl lg:text-6xl">
             {t.work.headingA}
             <span className="text-[#A8B0D0]"> {t.work.headingB}</span>
           </h1>
 
-          <div className="mt-10 flex flex-wrap gap-2.5">
-            {categories.map((category) => {
-              const isActive = activeCategory === category;
-              return (
-                <button
-                  key={category}
-                  onClick={() => setActiveCategory(category)}
-                  className={`rounded-full border px-4 py-2 text-sm font-medium transition ${
-                    isActive
-                      ? "border-[#35D6B0] bg-[#35D6B0]/10 text-[#35D6B0]"
-                      : "border-white/10 bg-white/[0.03] text-white/60 hover:border-white/20 hover:text-white"
-                  }`}
-                >
-                  {category === "all"
-                    ? language === "ar"
-                      ? "الكل"
-                      : "All"
-                    : category}
-                </button>
-              );
-            })}
-          </div>
+          {loading && <p className="mt-16 text-white/40">Loading…</p>}
 
-          <div className="mt-12 grid gap-8 sm:grid-cols-2">
-            {filteredProjects.map((project) => {
-              const Icon = project.icon;
+          <div className="mt-16 grid gap-8 sm:grid-cols-2">
+            {projects.map((project) => {
+              const Icon = iconMap[project.iconKey];
               const openLiveSite = () => window.open(project.liveUrl, "_blank", "noopener,noreferrer");
 
               return (
                 <article
-                  key={project.slug}
+                  key={project.id}
                   role="link"
                   tabIndex={0}
                   aria-label={project.title[language]}
@@ -76,51 +40,39 @@ function Work() {
                   className="group flex cursor-pointer flex-col overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] transition duration-500 hover:-translate-y-1 hover:border-white/20 hover:bg-white/[0.05] focus-visible:outline-2 focus-visible:outline-[#35D6B0]"
                 >
                   <div className={`relative h-56 overflow-hidden bg-gradient-to-br ${project.gradient}`}>
-                    <img
-                      src={project.images[0]}
-                      alt={project.title[language]}
-                      className="absolute inset-0 h-full w-full object-contain p-6 transition duration-500 group-hover:scale-[1.03]"
-                    />
+                    {project.images[0] && (
+                      <img src={project.images[0]} alt={project.title[language]} className="absolute inset-0 h-full w-full object-contain p-6 transition duration-500 group-hover:scale-[1.03]" />
+                    )}
                     <div className="absolute left-5 top-5 flex h-11 w-11 items-center justify-center rounded-xl bg-white/15 backdrop-blur-sm">
                       <Icon size={20} className="text-white" />
                     </div>
-                    <span className="absolute bottom-4 right-5 font-display text-6xl font-semibold text-white/10">
-                      {project.number}
-                    </span>
+                    <span className="absolute bottom-4 right-5 font-display text-6xl font-semibold text-white/10">{project.number}</span>
                   </div>
 
                   <div className="flex flex-1 flex-col justify-between p-8">
                     <div>
-                      <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-white/60">
-                        {project.category[language]}
-                      </span>
-                      <h3 className="mt-4 text-2xl font-semibold tracking-tight">
-                        {project.title[language]}
-                      </h3>
-                      <p className="mt-3 leading-6 text-[#A8B0D0]">
-                        {project.description[language]}
-                      </p>
+                      <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-white/60">{project.category[language]}</span>
+                      <h3 className="mt-4 text-2xl font-semibold tracking-tight">{project.title[language]}</h3>
+                      <p className="mt-3 leading-6 text-[#A8B0D0]">{project.description[language]}</p>
                       <div className="mt-5 flex flex-wrap gap-2">
                         {project.technologies.map((technology) => (
-                          <span key={technology} className="rounded-lg border border-white/10 bg-white/5 px-2.5 py-1.5 text-xs text-white/60">
-                            {technology}
-                          </span>
+                          <span key={technology} className="rounded-lg border border-white/10 bg-white/5 px-2.5 py-1.5 text-xs text-white/60">{technology}</span>
                         ))}
                       </div>
                     </div>
 
                     <div className="mt-8 flex items-center gap-3">
-                      <Link
-                        to={`/work/${project.slug}`}
-                        onClick={(e) => e.stopPropagation()}
-                        className="group/btn inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-[#35D6B0] px-5 py-3 text-sm font-semibold text-[#080B2A] transition hover:bg-[#4DE4C0]"
-                      >
+                      <Link to={`/work/${project.slug}`} onClick={(e) => e.stopPropagation()} className="group/btn inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-[#35D6B0] px-5 py-3 text-sm font-semibold text-[#080B2A] transition hover:bg-[#4DE4C0]">
                         {t.work.caseStudy}
                         <ArrowRight size={16} className="transition-transform group-hover/btn:translate-x-1 rtl:rotate-180" />
                       </Link>
-
                       <a
-                        href={getWhatsAppUrl(`Hi YB Dev! I'd like to talk about a project like "${project.title.en}".`)}
+                        href={getWhatsAppUrl(
+                          language,
+                          language === "ar"
+                            ? `مرحبًا YB Dev! أرغب في التحدث عن مشروع مثل "${project.title.ar}".`
+                            : `Hi YB Dev! I'd like to talk about a project like "${project.title.en}".`
+                        )}
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={(e) => e.stopPropagation()}
@@ -135,15 +87,8 @@ function Work() {
               );
             })}
           </div>
-
-          {filteredProjects.length === 0 && (
-            <p className="mt-16 text-center text-sm text-white/50">
-              {language === "ar" ? "لا توجد مشاريع في هذه الفئة." : "No projects in this category yet."}
-            </p>
-          )}
         </div>
       </section>
-
       <Footer />
     </main>
   );

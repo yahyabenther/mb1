@@ -3,18 +3,22 @@ import { useParams, Link, Navigate } from "react-router-dom";
 import { ArrowLeft, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/sections/Footer";
-import { projects } from "../data/projects";
+import { useProject } from "../hooks/useProject";
+import { iconMap } from "../lib/iconMap";
 import { useLanguage } from "../i18n/LanguageContext";
 
 function ProjectCase() {
   const { slug } = useParams();
   const { t, language } = useLanguage();
-  const project = projects.find((p) => p.slug === slug);
+  const { project, loading } = useProject(slug);
   const [activeImage, setActiveImage] = useState(0);
 
+  if (loading) {
+    return <div className="flex min-h-screen items-center justify-center text-white/40">Loading…</div>;
+  }
   if (!project) return <Navigate to="/" replace />;
 
-  const Icon = project.icon;
+  const Icon = iconMap[project.iconKey];
   const images = project.images;
 
   const goPrev = () => setActiveImage((i) => (i === 0 ? images.length - 1 : i - 1));
@@ -23,20 +27,14 @@ function ProjectCase() {
   return (
     <main className="min-h-screen">
       <Navbar />
-
       <section className="relative pt-40 pb-20">
         <div className="mx-auto max-w-4xl px-6 lg:px-8">
           <Link to="/work" className="inline-flex items-center gap-2 text-sm text-white/60 transition hover:text-white">
             <ArrowLeft size={16} className="rtl:rotate-180" />
             {t.projectCase.backToWork}
           </Link>
-
-          <p className="mt-8 text-sm font-medium uppercase tracking-[0.2em] text-[#35D6B0]">
-            {project.category[language]}
-          </p>
-          <h1 className="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl lg:text-6xl">
-            {project.title[language]}
-          </h1>
+          <p className="mt-8 text-sm font-medium uppercase tracking-[0.2em] text-[#35D6B0]">{project.category[language]}</p>
+          <h1 className="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl lg:text-6xl">{project.title[language]}</h1>
         </div>
       </section>
 
@@ -48,18 +46,13 @@ function ProjectCase() {
                 key={img}
                 src={img}
                 alt={`${project.title[language]} ${index + 1}`}
-                className={`absolute inset-0 h-full w-full object-contain p-8 transition-opacity duration-500 ${
-                  index === activeImage ? "opacity-100" : "opacity-0"
-                }`}
+                className={`absolute inset-0 h-full w-full object-contain p-8 transition-opacity duration-500 ${index === activeImage ? "opacity-100" : "opacity-0"}`}
               />
             ))}
-
             <div className="pointer-events-none absolute left-6 top-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-white/15 backdrop-blur-sm">
               <Icon size={26} className="text-white" />
             </div>
-            <span className="pointer-events-none absolute bottom-4 right-6 font-display text-8xl font-semibold text-white/10">
-              {project.number}
-            </span>
+            <span className="pointer-events-none absolute bottom-4 right-6 font-display text-8xl font-semibold text-white/10">{project.number}</span>
 
             {images.length > 1 && (
               <>
@@ -76,12 +69,7 @@ function ProjectCase() {
           {images.length > 1 && (
             <div className="mt-5 flex justify-center gap-2">
               {images.map((img, index) => (
-                <button
-                  key={img}
-                  onClick={() => setActiveImage(index)}
-                  aria-label={`Show ${index + 1}`}
-                  className={`h-2 rounded-full transition-all ${index === activeImage ? "w-6 bg-[#35D6B0]" : "w-2 bg-white/20 hover:bg-white/40"}`}
-                />
+                <button key={img} onClick={() => setActiveImage(index)} aria-label={`Show ${index + 1}`} className={`h-2 rounded-full transition-all ${index === activeImage ? "w-6 bg-[#35D6B0]" : "w-2 bg-white/20 hover:bg-white/40"}`} />
               ))}
             </div>
           )}
@@ -91,15 +79,11 @@ function ProjectCase() {
       <section className="mx-auto max-w-4xl px-6 py-20 lg:px-8">
         <div className="grid gap-16 sm:grid-cols-2">
           <div>
-            <h2 className="text-sm font-semibold uppercase tracking-[0.15em] text-white/50">
-              {t.projectCase.brief}
-            </h2>
+            <h2 className="text-sm font-semibold uppercase tracking-[0.15em] text-white/50">{t.projectCase.brief}</h2>
             <p className="mt-4 leading-7 text-[#A8B0D0]">{project.brief[language]}</p>
           </div>
           <div>
-            <h2 className="text-sm font-semibold uppercase tracking-[0.15em] text-white/50">
-              {t.projectCase.approach}
-            </h2>
+            <h2 className="text-sm font-semibold uppercase tracking-[0.15em] text-white/50">{t.projectCase.approach}</h2>
             <p className="mt-4 leading-7 text-[#A8B0D0]">{project.approach[language]}</p>
           </div>
         </div>
@@ -107,21 +91,15 @@ function ProjectCase() {
         <div className="mt-16 grid grid-cols-3 gap-6 rounded-[2rem] border border-white/10 bg-white/[0.03] p-8 sm:p-10">
           {project.results.map((result) => (
             <div key={result.label.en}>
-              <p className="font-display text-3xl font-semibold tracking-tight sm:text-4xl">
-                {result.value}
-              </p>
-              <p className="mt-2 text-sm leading-6 text-[#A8B0D0]">
-                {result.label[language]}
-              </p>
+              <p className="font-display text-3xl font-semibold tracking-tight sm:text-4xl">{result.value}</p>
+              <p className="mt-2 text-sm leading-6 text-[#A8B0D0]">{result.label[language]}</p>
             </div>
           ))}
         </div>
 
         <div className="mt-16 flex flex-wrap gap-2">
           {project.technologies.map((technology) => (
-            <span key={technology} className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-xs text-white/60">
-              {technology}
-            </span>
+            <span key={technology} className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-xs text-white/60">{technology}</span>
           ))}
         </div>
 
@@ -132,7 +110,6 @@ function ProjectCase() {
           </a>
         </div>
       </section>
-
       <Footer />
     </main>
   );

@@ -125,6 +125,9 @@ export const translations = {
       formEmail: "Email address",
       formMessage: "Tell us about your project",
       send: "Send message",
+      sending: "Sending…",
+success: "Thanks! Your message has been sent — we'll get back to you soon.",
+error: "Something went wrong. Please try again or email us directly.",
     },
     footer: {
       tagline:
@@ -277,6 +280,9 @@ export const translations = {
       formEmail: "البريد الإلكتروني",
       formMessage: "أخبرنا عن مشروعك",
       send: "إرسال الرسالة",
+      sending: "جارٍ الإرسال…",
+success: "شكرًا! تم إرسال رسالتك — سنتواصل معك قريبًا.",
+error: "حدث خطأ ما. حاول مرة أخرى أو راسلنا مباشرة.",
     },
     footer: {
       tagline:

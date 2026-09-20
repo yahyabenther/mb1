@@ -4,8 +4,7 @@ import { WhatsAppIcon, getWhatsAppUrl } from "../WhatsAppButton";
 import { useLanguage } from "../../i18n/LanguageContext";
 
 function Hero() {
-  const { t } = useLanguage();
-
+const { t, language } = useLanguage();
   return (
     <section className="relative min-h-screen overflow-hidden pb-20 pt-40 lg:pt-48">
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
@@ -44,7 +43,7 @@ function Hero() {
               </a>
 
               <a
-                href={getWhatsAppUrl()}
+  href={getWhatsAppUrl(language)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-full border border-white/20 px-6 py-3.5 text-sm font-semibold text-white transition hover:border-[#25D366] hover:text-[#25D366]"

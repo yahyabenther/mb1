@@ -51,13 +51,24 @@ function Navbar() {
           </a>
         </div>
 
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="rounded-lg border border-white/20 p-2 md:hidden"
-          aria-label="Toggle menu"
-        >
-          {isOpen ? <X size={22} /> : <Menu size={22} />}
-        </button>
+        {/* Mobile: language toggle + menu button, side by side */}
+        <div className="flex items-center gap-2 md:hidden">
+          <button
+            onClick={toggleLanguage}
+            aria-label="Switch language"
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-white/30 bg-white/10 text-white backdrop-blur-md transition hover:bg-white/20"
+          >
+            <Globe size={20} />
+          </button>
+
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-white/30 bg-white/10 text-white backdrop-blur-md transition hover:bg-white/20"
+            aria-label="Toggle menu"
+          >
+            {isOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
+        </div>
       </nav>
 
       {isOpen && (
@@ -75,14 +86,6 @@ function Navbar() {
             <a href="/#contact" onClick={() => setIsOpen(false)}>
               {t.nav.contact}
             </a>
-
-            <button
-              onClick={toggleLanguage}
-              className="flex items-center justify-center gap-1.5 rounded-full border border-white/20 py-2.5 text-sm font-medium text-white/70"
-            >
-              <Globe size={14} />
-              {language === "en" ? "العربية" : "English"}
-            </button>
 
             <a
               href="/#contact"

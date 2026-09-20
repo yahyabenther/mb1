@@ -1,7 +1,15 @@
-export const WHATSAPP_NUMBER = "21656948481"; // TODO: replace with your real WhatsApp number (country code + number, digits only)
-export const WHATSAPP_MESSAGE =
-  "Hi YB Dev! 👋 I'm interested in discussing a project with you. I'd love to hear more about how we can work together.";
-export function getWhatsAppUrl(message: string = WHATSAPP_MESSAGE) {
+import type { Language } from "../i18n/translations";
+import { useLanguage } from "../i18n/LanguageContext";
+
+export const WHATSAPP_NUMBER = "21623049860"; // TODO: replace with your real WhatsApp number (country code + number, digits only)
+
+const DEFAULT_MESSAGES: Record<Language, string> = {
+  en: "Hi YB Dev! I'd like to talk about a project.",
+  ar: "مرحبًا YB Dev! أرغب في التحدث عن مشروع.",
+};
+
+export function getWhatsAppUrl(language: Language, customMessage?: string) {
+  const message = customMessage ?? DEFAULT_MESSAGES[language];
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 }
 
@@ -14,9 +22,11 @@ export function WhatsAppIcon({ size = 26 }: { size?: number }) {
 }
 
 function WhatsAppButton() {
+  const { language } = useLanguage();
+
   return (
     <a
-      href={getWhatsAppUrl()}
+      href={getWhatsAppUrl(language)}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Message us on WhatsApp"
