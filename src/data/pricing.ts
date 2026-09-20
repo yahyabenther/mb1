@@ -23,14 +23,14 @@ export const pricingServices: PricingService[] = [
       ar: "من موقع بصفحة واحدة إلى منصة مخصصة متكاملة — اختر الباقة التي تناسب مشروعك.",
     },
     tiers: [
-      {
-        name: { en: "Basic Site", ar: "موقع أساسي" },
-        price: "1,200 TND",
-        note: { en: "Paid in 3 installments", ar: "الدفع على 3 دفعات" },
-        description: {
-          en: "A complete site ready to launch, no extras.",
-          ar: "موقع متكامل جاهز للإطلاق، بدون إضافات.",
-        },
+    {
+  name: { en: "Profile Website", ar: "موقع بروفايل" },
+  price: "$150",
+  note: { en: "Paid in 3 installments", ar: "الدفع على 3 دفعات" },
+  description: {
+    en: "A clean profile or portfolio site to establish your presence online.",
+    ar: "موقع بروفايل أو تعريفي أنيق لتأسيس حضورك على الإنترنت.",
+  },
         featured: false,
         features: [
           { en: "Custom-branded interface", ar: "واجهة مخصصة لعلامتك" },
@@ -41,14 +41,14 @@ export const pricingServices: PricingService[] = [
           { en: "30-day warranty & support", ar: "ضمان ودعم لمدة 30 يومًا" },
         ],
       },
-      {
-        name: { en: "Advanced Site", ar: "موقع متقدم" },
-        price: "1,800 TND",
-        note: { en: "Paid in 3 installments", ar: "الدفع على 3 دفعات" },
-        description: {
-          en: "For sites that need real content or store features.",
-          ar: "للمواقع التي تحتاج محتوى حقيقيًا أو ميزات متجر.",
-        },
+   {
+  name: { en: "E-commerce Website", ar: "متجر إلكتروني" },
+  price: "$200",
+  note: { en: "Paid in 3 installments", ar: "الدفع على 3 دفعات" },
+  description: {
+    en: "A full online store with product management and checkout.",
+    ar: "متجر إلكتروني متكامل مع إدارة المنتجات والدفع الإلكتروني.",
+  },
         featured: true,
         features: [
           { en: "Everything in Basic", ar: "كل ما في الباقة الأساسية" },
@@ -61,7 +61,7 @@ export const pricingServices: PricingService[] = [
       },
       {
         name: { en: "Custom Platform", ar: "منصة مخصصة" },
-        price: "From 2,500 TND",
+        price: "From $400",
         note: { en: "Scoped to your requirements", ar: "حسب احتياجاتك" },
         description: {
           en: "Fully custom-built, priced around what you need.",
@@ -87,7 +87,7 @@ export const pricingServices: PricingService[] = [
     tiers: [
       {
         name: { en: "Starter App", ar: "تطبيق أساسي" },
-        price: "3,000 TND",
+        price: "$300",
         note: { en: "Paid in 3 installments", ar: "الدفع على 3 دفعات" },
         description: {
           en: "A focused app with core functionality, launch-ready.",
@@ -103,7 +103,7 @@ export const pricingServices: PricingService[] = [
       },
       {
         name: { en: "Advanced App", ar: "تطبيق متقدم" },
-        price: "5,500 TND",
+        price: "$350",
         note: { en: "Paid in 3 installments", ar: "الدفع على 3 دفعات" },
         description: {
           en: "For apps with accounts, data, or backend logic.",
@@ -120,7 +120,7 @@ export const pricingServices: PricingService[] = [
       },
       {
         name: { en: "Custom App", ar: "تطبيق مخصص" },
-        price: "From 9,000 TND",
+        price: "From $500",
         note: { en: "Scoped to your requirements", ar: "حسب احتياجاتك" },
         description: {
           en: "Complex apps — marketplaces, real-time features, etc.",
@@ -146,7 +146,7 @@ export const pricingServices: PricingService[] = [
     tiers: [
       {
         name: { en: "Starter Tool", ar: "أداة أساسية" },
-        price: "2,500 TND",
+        price: "$350",
         note: { en: "Paid in 3 installments", ar: "الدفع على 3 دفعات" },
         description: {
           en: "A single-purpose tool solving one clear problem.",
@@ -162,7 +162,7 @@ export const pricingServices: PricingService[] = [
       },
       {
         name: { en: "Advanced Tool", ar: "أداة متقدمة" },
-        price: "4,500 TND",
+        price: "$450",
         note: { en: "Paid in 3 installments", ar: "الدفع على 3 دفعات" },
         description: {
           en: "Multi-user tools with roles and structured data.",
@@ -178,7 +178,7 @@ export const pricingServices: PricingService[] = [
       },
       {
         name: { en: "Custom Platform", ar: "منصة مخصصة" },
-        price: "From 8,000 TND",
+        price: "From $500",
         note: { en: "Scoped to your requirements", ar: "حسب احتياجاتك" },
         description: {
           en: "Full internal systems built around your operations.",
