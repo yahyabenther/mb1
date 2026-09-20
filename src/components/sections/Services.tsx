@@ -9,7 +9,7 @@ const serviceMeta = [
 ] as const;
 
 function Services() {
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
 
   return (
     <section id="services" className="relative py-32">
