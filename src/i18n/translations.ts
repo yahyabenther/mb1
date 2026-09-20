@@ -1,6 +1,101 @@
+export type TranslationSet = {
+  nav: {
+    services: string;
+    projects: string;
+    about: string;
+    contact: string;
+    startProject: string;
+  };
+  hero: {
+    est: string;
+    titleLine1: string;
+    titleLine2: string;
+    remoteStudio: string;
+    tagline: string;
+    description: string;
+    startProject: string;
+    whatsapp: string;
+  };
+  services: {
+    label: string;
+    headingA: string;
+    headingB: string;
+    viewPricing: string;
+    items: Record<
+      "web-development" | "mobile-apps" | "desktop-software",
+      { title: string; description: string }
+    >;
+  };
+  process: {
+    label: string;
+    headingA: string;
+    headingB: string;
+    steps: { title: string; description: string }[];
+  };
+  projectsSection: {
+    label: string;
+    headingA: string;
+    headingB: string;
+    viewAll: string;
+    viewCaseStudy: string;
+    visitSite: string;
+  };
+  about: {
+    label: string;
+    headingA: string;
+    headingB: string;
+    paragraph: string;
+    stats: { value: string; label: string }[];
+  };
+  testimonials: {
+    label: string;
+    items: { quote: string; author: string; role: string }[];
+  };
+  contact: {
+    label: string;
+    headingA: string;
+    headingB: string;
+    paragraph: string;
+    location: string;
+    formName: string;
+    formEmail: string;
+    formMessage: string;
+    send: string;
+    sending: string;
+    success: string;
+    error: string;
+  };
+  footer: {
+    tagline: string;
+    explore: string;
+    contactHeading: string;
+    follow: string;
+    remote: string;
+    rights: string;
+    process: string;
+  };
+  work: {
+    label: string;
+    headingA: string;
+    headingB: string;
+    caseStudy: string;
+  };
+  projectCase: {
+    backToWork: string;
+    brief: string;
+    approach: string;
+    startSimilar: string;
+  };
+  pricingPage: {
+    backToServices: string;
+    pricingLabel: string;
+    getPlan: string;
+    recommended: string;
+  };
+};
 export type Language = "en" | "ar";
 
-export const translations = {
+export const translations: Record<Language, TranslationSet> = {
   en: {
     nav: {
       services: "Services",
@@ -313,4 +408,4 @@ error: "حدث خطأ ما. حاول مرة أخرى أو راسلنا مباش�
       recommended: "الأكثر طلبًا",
     },
   },
-} as const;
+}  ;

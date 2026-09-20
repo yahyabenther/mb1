@@ -1,11 +1,10 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import type { ReactNode } from "react";
-import { translations, type Language } from "./translations";
-
+import { translations, type Language, type TranslationSet } from "./translations";
 type LanguageContextValue = {
   language: Language;
   toggleLanguage: () => void;
-  t: (typeof translations)["en"];
+  t: TranslationSet;
   dir: "ltr" | "rtl";
 };
 
